@@ -1,0 +1,37 @@
+/* src/styles/tokens.css */
+
+:root {
+  /* Core palette */
+  --night: #0B0B0E;
+  --signal-red: #E11D2E;
+  --ember: #7A1420;
+  --paper: #F3EFE9;
+  --ash: #8B8983;
+  --trust-gold: #C9A24B;
+
+  /* Structural grays — for borders/dividers ONLY, never content color */
+  --gray-1: #1A1A1F;
+  --gray-2: #2A2A30;
+
+  /* Spacing base unit — everything should be a multiple of this */
+  --space-unit: 8px;
+
+  /* Fonts */
+  --font-display: 'Archivo Expanded', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-utility: 'IBM Plex Mono', monospace;
+
+  /* Type scale — ratio 1.25 */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 25px;
+  --text-2xl: 31px;
+  --text-3xl: 39px;
+
+  /* Letter spacing */
+  --tracking-display: 0.5%;
+  --tracking-mono: 2%;
+  --tracking-body: 0;
+}
