@@ -130,7 +130,7 @@ const routeType = i === 0 ? 'Recommended' : 'Shortest';
         source: sourceId,
         paint:
           routeType.toLowerCase() === 'recommended'
-            ? { 'line-color': '#FFFF00', 'line-width': 20,  'line-opacity': 1 }
+            ? { 'line-color': '#00FF00', 'line-width': 10,  'line-opacity': 1 }
             : { 'line-color': '#E11D2E', 'line-width': 8, 'line-dasharray': [2, 2] },
       });
 map.moveLayer(layerId);

@@ -13,6 +13,14 @@ router.post("/", (req: Request, res: Response) => {
 
   const recommended = findRoute(origin.lat, origin.lng, destination.lat, destination.lng, true);
   const shortest = findRoute(origin.lat, origin.lng, destination.lat, destination.lng, false);
+// Offset shortest route coordinates for visual distinction
+if (shortest) {
+  shortest.path = shortest.path.map(n => ({
+    ...n,
+    lat: n.lat + 0.0002,
+    lng: n.lng + 0.0002,
+  }));
+}
 
   const toGeoJSON = (route: any) => ({
     type: "FeatureCollection",
