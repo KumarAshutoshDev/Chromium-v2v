@@ -1,0 +1,12 @@
+.map-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  /* MVP dark-mode trick: OpenFreeMap doesn't ship a true dark style keylessly,
+     so we invert + rotate hue to approximate the Night palette without a paid key.
+     Swap this out later if AI/BE finds a proper dark vector style. */
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
+}

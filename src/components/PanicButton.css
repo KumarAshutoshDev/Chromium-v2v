@@ -1,0 +1,30 @@
+.panic-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%; /* circular — the one non-pill shape in the system */
+  background-color: var(--signal-red);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 900;
+  letter-spacing: var(--tracking-display);
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+  animation: heartbeat-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes heartbeat-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Respect reduced motion — no pulse if user has this setting on */
+@media (prefers-reduced-motion: reduce) {
+  .panic-button {
+    animation: none;
+  }
+}

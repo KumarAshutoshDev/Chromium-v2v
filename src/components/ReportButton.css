@@ -1,0 +1,15 @@
+.report-button {
+  background-color: var(--ember);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  border: none;
+  border-radius: 4px; /* hard radius — deliberately less soft than calm actions */
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.report-button:hover {
+  background-color: #8f1826;
+}

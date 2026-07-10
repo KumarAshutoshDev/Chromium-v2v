@@ -1,0 +1,9 @@
+.floating-panel {
+  background-color: rgba(11, 11, 14, 0.85); /* --night at 85% opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--gray-2);
+  border-radius: 12px;
+  padding: 16px 24px;
+  color: var(--paper);
+}
