@@ -1,9 +1,18 @@
 // src/lib/api.ts
 import type { SafeStop, Segment, Route, PanicResult } from '../types';
 import { mockSafeStops, mockSegments, mockRoutes, mockPanicResults } from './mockData';
+import { auth } from './firebase';
+
+async function authHeaders(): Promise<Record<string, string>> {
+  const token = await auth.currentUser?.getIdToken();
+  return {
+    'Content-Type': 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+}
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-const USE_MOCK = true; // flip to false once BE's real endpoints are confirmed working
+const USE_MOCK = false; // flip to false once BE's real endpoints are confirmed working
 
 export async function fetchSafeStops(): Promise<SafeStop[]> {
   if (USE_MOCK) return mockSafeStops;
@@ -26,7 +35,7 @@ export async function confirmReport(reportId: string, uid: string): Promise<void
   }
   await fetch(`${API_URL}/api/reports/${reportId}/confirm`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: await authHeaders(),
     body: JSON.stringify({ uid }),
   });
 }

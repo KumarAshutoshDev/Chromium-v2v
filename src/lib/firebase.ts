@@ -4,12 +4,12 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth, signInAnonymously, onAuthStateChanged, type User } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "PASTE_FROM_BE",
-  authDomain: "PASTE_FROM_BE",
-  projectId: "PASTE_FROM_BE",
-  storageBucket: "PASTE_FROM_BE",
-  messagingSenderId: "PASTE_FROM_BE",
-  appId: "PASTE_FROM_BE",
+  apiKey: "AIzaSyBG6IzlhZZqwoFdDa71Tl_ArLwqBiB3rH8",
+  authDomain: "herpath-448f0.firebaseapp.com",
+  projectId: "herpath-448f0",
+  storageBucket: "herpath-448f0.firebasestorage.app",
+  messagingSenderId: "1025551402546",
+  appId: "1:1025551402546:web:2824382a6e98d770941e2b",
 };
 
 const app = initializeApp(firebaseConfig);

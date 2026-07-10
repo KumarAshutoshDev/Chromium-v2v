@@ -14,6 +14,10 @@ html, body {
 
 body {
   background-color: var(--night);
+  background-image: radial-gradient(circle at 15% 0%, var(--night-violet), transparent 60%),
+    radial-gradient(circle at 85% 100%, var(--night-teal), transparent 55%);
+  background-attachment: fixed;
+
   color: var(--paper);
   font-family: var(--font-body);
   font-size: var(--text-base);
