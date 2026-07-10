@@ -1,0 +1,25 @@
+.safestop-card {
+  background-color: rgba(11, 11, 14, 0.85);
+  border: 1px solid var(--gray-2);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.safestop-card--confirmed {
+  border-left: 2px solid var(--trust-gold);
+}
+
+.safestop-card__title {
+  font-family: var(--font-body);
+  font-weight: 600; /* Inter Semibold */
+  color: var(--paper);
+  font-size: var(--text-base);
+}
+
+.safestop-card__meta {
+  font-family: var(--font-utility);
+  color: var(--ash);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  margin-top: 4px;
+}
