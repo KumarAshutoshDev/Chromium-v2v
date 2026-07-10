@@ -10,5 +10,19 @@ export interface SafeStop {
 export interface Segment {
   id: string;
   geometry: GeoJSON.LineString;
-  aggregatedSeverity: number; // 0-1, drives line weight
+  aggregatedSeverity: number;
+}
+
+export interface Route {
+  type: 'recommended' | 'shortest';
+  geometry: GeoJSON.LineString;
+  estimatedMinutes: number;
+  hazardCount: number;
+}
+
+export interface PanicResult {
+  stop: SafeStop;
+  route: GeoJSON.LineString;
+  summary: string; // e.g. "Café Amara — 3 min, lit main road, 5 confirmations."
+  estimatedMinutes: number;
 }

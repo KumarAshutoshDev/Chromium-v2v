@@ -1,0 +1,29 @@
+.destination-input-wrapper {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 420px);
+  z-index: 10;
+}
+
+.destination-input {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.destination-input__field {
+  flex: 1;
+  background-color: var(--gray-1);
+  border: 1px solid var(--gray-2);
+  border-radius: 999px;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  padding: 10px 16px;
+}
+
+.destination-input__field::placeholder {
+  color: var(--ash);
+}

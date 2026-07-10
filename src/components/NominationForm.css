@@ -1,0 +1,65 @@
+.nomination-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nomination-form__input {
+  background-color: var(--gray-1);
+  border: 1px solid var(--gray-2);
+  border-radius: 8px;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  padding: 10px 12px;
+}
+
+.nomination-form__chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nomination-form__chip {
+  background: transparent;
+  color: var(--ash);
+  border: 1px solid var(--ash);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+.nomination-form__chip--active {
+  background-color: var(--ember);
+  border-color: var(--ember);
+  color: var(--paper);
+}
+
+.nomination-form__hint {
+  font-family: var(--font-utility);
+  color: var(--ash);
+  font-size: var(--text-xs);
+}
+
+.nomination-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.nomination-form__cancel {
+  background: none;
+  border: none;
+  color: var(--ash);
+  cursor: pointer;
+}
+
+.nomination-form__submit {
+  background-color: var(--ember);
+  color: var(--paper);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
