@@ -6524,31 +6524,31 @@
       "from": "n10086861526",
       "to": "n11022205623",
       "distance": 13.184647734129754,
-      "hazardScore": 0
+      "hazardScore": 1000
     },
     {
       "from": "n11022205623",
       "to": "n10086861528",
       "distance": 18.72611235604341,
-      "hazardScore": 0
+      "hazardScore": 1000
     },
     {
       "from": "n10086861528",
       "to": "n11425338155",
       "distance": 5.207487256397374,
-      "hazardScore": 0
+      "hazardScore": 1000
     },
     {
       "from": "n11425338155",
       "to": "n11022205622",
       "distance": 5.743224661792289,
-      "hazardScore": 0
+      "hazardScore": 1000
     },
     {
       "from": "n11022205622",
       "to": "n11425338154",
       "distance": 2.53397198590314,
-      "hazardScore": 0
+      "hazardScore": 1000
     },
     {
       "from": "n11425338154",
