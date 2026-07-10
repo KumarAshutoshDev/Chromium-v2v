@@ -40,13 +40,14 @@ function App() {
     setShowNominationForm(false);
   };
 
-  const handleSetDestination = async (query: string) => {
+const handleSetDestination = async (query: string) => {
     console.log('Destination set:', query);
-    const result = await fetchRoute([77.209, 28.6139], [77.2110, 28.6148]);
+    const result = await fetchRoute([12.9716, 77.5946], [12.9724, 77.5954]);
     setRoutes(result);
-  };
+};
 
   const handlePanicSelect = (result: PanicResult) => {
+console.log("Panic select result:", result);
     setPanicRoute(result);
     setShowPanic(false);
   };
@@ -82,8 +83,8 @@ function App() {
         }}>
           <FloatingPanel>
             <div style={{ fontFamily: 'var(--font-body)', color: 'var(--paper)', fontSize: 'var(--text-sm)', marginBottom: 12 }}>
-              Heading to <strong>{panicRoute.stop.name}</strong> — {panicRoute.estimatedMinutes} min
-            </div>
+Heading to <strong>{panicRoute?.name || 'selected stop'}</strong> — {panicRoute?.walkTime || '?'}
+</div>
             {uid && <LiveShareToggle uid={uid} />}
             <button
               onClick={() => setPanicRoute(null)}

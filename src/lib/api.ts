@@ -43,12 +43,15 @@ export async function confirmReport(reportId: string, uid: string): Promise<void
 export async function fetchRoute(
   origin: [number, number],
   destination: [number, number]
-): Promise<Route[]> {
+) {
   if (USE_MOCK) return mockRoutes;
   const res = await fetch(`${API_URL}/api/route`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ origin, destination }),
+    body: JSON.stringify({
+      origin: { lat: origin[0], lng: origin[1] },
+      destination: { lat: destination[0], lng: destination[1] },
+    }),
   });
   if (!res.ok) throw new Error('Failed to fetch route');
   return res.json();
@@ -59,7 +62,9 @@ export async function fetchPanicReroute(userLocation: [number, number]): Promise
   const res = await fetch(`${API_URL}/api/panic-reroute`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userLocation }),
+    body: JSON.stringify({
+      userLocation: { lat: userLocation[0], lng: userLocation[1] },
+    }),
   });
   if (!res.ok) throw new Error('Failed to fetch panic reroute');
   return res.json();
