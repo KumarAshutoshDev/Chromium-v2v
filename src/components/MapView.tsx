@@ -105,6 +105,9 @@ export default function MapView({ center = [77.5946, 12.9716], zoom = 15, onSafe
     const map = mapRef.current;
     if (!map || !mapReady) return;
 
+// Remove any previous shortest layer so panic route doesn't leave a stale red line
+if (map.getLayer('route-Shortest-layer')) map.removeLayer('route-Shortest-layer');
+if (map.getSource('route-Shortest')) map.removeSource('route-Shortest');
 try {
   const routeList = Array.isArray(routes) ? routes : [routes.recommended, routes.shortest].filter(Boolean);
   console.log('Route list for map:', routeList);
@@ -118,10 +121,19 @@ const routeType = i === 0 ? 'Recommended' : 'Shortest';
       properties: {},
       geometry: route.geometry || (route.features?.[0]?.geometry),
     };
+if (routeType === 'Shortest') {
+  console.log('Shortest geojson to set:', geojson);
+}
 
     const existingSource = map.getSource(sourceId) as maplibregl.GeoJSONSource | undefined;
+if (routeType === 'Shortest') {
+  console.log('Shortest source exists:', !!existingSource);
+}
     if (existingSource) {
       existingSource.setData(geojson);
+if (routeType === 'Shortest') {
+  console.log('setData called for Shortest');
+}
     } else {
       map.addSource(sourceId, { type: 'geojson', data: geojson });
       map.addLayer({
@@ -130,8 +142,8 @@ const routeType = i === 0 ? 'Recommended' : 'Shortest';
         source: sourceId,
         paint:
           routeType.toLowerCase() === 'recommended'
-            ? { 'line-color': '#00FF00', 'line-width': 10,  'line-opacity': 1 }
-            : { 'line-color': '#E11D2E', 'line-width': 8, 'line-dasharray': [2, 2] },
+            ? { 'line-color': '#00FF00', 'line-width': 6,  'line-opacity': 1 }
+            : { 'line-color': '#E11D2E', 'line-width': 12, 'line-dasharray': [4, 4] },
       });
 map.moveLayer(layerId);
     }

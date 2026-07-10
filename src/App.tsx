@@ -72,11 +72,13 @@ console.log("Panic select result:", result);
 
       {!showPanic && <DestinationInput onSetDestination={handleSetDestination} />}
 
-      {!showPanic && routes.length > 0 && !panicRoute && (
-        <RouteComparisonPanel routes={routes} onClose={() => setRoutes([])} />
-      )}
-
-      {panicRoute && (
+{!showPanic && routes?.recommended && !panicRoute && (
+  <RouteComparisonPanel
+    routes={[routes.recommended, routes.shortest]}
+    onClose={() => setRoutes({} as any)}
+  />
+)}    
+{panicRoute && (
         <div className="panic-directions-banner" style={{
           position: 'absolute', top: 16, left: '50%', transform: 'translateX(-50%)',
           zIndex: 10, width: 'min(92vw, 420px)',
