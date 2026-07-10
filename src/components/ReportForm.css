@@ -1,0 +1,61 @@
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.report-form__chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.report-form__chip {
+  background: transparent;
+  color: var(--ash);
+  border: 1px solid var(--ash);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.report-form__chip--active {
+  background-color: var(--ember);
+  border-color: var(--ember);
+  color: var(--paper);
+}
+
+.report-form__textarea {
+  background-color: var(--gray-1);
+  border: 1px solid var(--gray-2);
+  border-radius: 8px;
+  color: var(--paper);
+  font-family: var(--font-utility); /* monospace placeholder cue, per design doc */
+  font-size: var(--text-sm);
+  padding: 12px;
+  resize: none;
+}
+
+.report-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.report-form__cancel {
+  background: none;
+  border: none;
+  color: var(--ash);
+  cursor: pointer;
+}
+
+.report-form__submit {
+  background-color: var(--ember);
+  color: var(--paper);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}

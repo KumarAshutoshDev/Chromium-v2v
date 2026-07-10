@@ -10,3 +10,12 @@
      Swap this out later if AI/BE finds a proper dark vector style. */
   filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
 }
+
+.safestop-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--paper);
+  border: var(--ring-width, 2px) solid var(--trust-gold);
+  cursor: pointer;
+}
