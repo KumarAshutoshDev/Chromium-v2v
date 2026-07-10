@@ -16,8 +16,8 @@ export default function PanicReroute({ onSelect, onDismiss }: PanicRerouteProps)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // MVP: user's real location comes later via geolocation; placeholder for now
-    fetchPanicReroute([77.209, 28.6139])
+    // Use Bangalore demo coordinates (matches seeded data)
+    fetchPanicReroute([12.9716, 77.5946])
       .then(setResults)
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -35,14 +35,14 @@ export default function PanicReroute({ onSelect, onDismiss }: PanicRerouteProps)
 
         {loading && <div className="panic-reroute__loading">Finding safe stops…</div>}
 
-        {!loading && results.map((result) => (
-          <div key={result.stop.id} className="panic-reroute__card">
+        {!loading && results.filter(Boolean).map((result: any) => (
+          <div key={result.safeStopId || result.name} className="panic-reroute__card">
             <SafeStopCard
-              name={result.stop.name}
-              distance={`${result.estimatedMinutes} min`}
-              lighting={result.summary.split(',')[1]?.trim() ?? result.stop.category}
-              confirmations={Number(result.summary.match(/(\d+) confirmation/)?.[1] ?? 0)}
-              isConfirmed={result.stop.trustScore > 0.7}
+              name={result.name}
+              distance={result.walkTime || `${result.distance}`}
+              lighting={result.lighting || 'unknown'}
+              confirmations={Number(result.oneLiner?.match(/(\d+) confirmation/)?.[1] ?? 0)}
+              isConfirmed={result.trustScore > 7}
             />
             <PrimaryButton onClick={() => onSelect(result)}>Go</PrimaryButton>
           </div>

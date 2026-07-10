@@ -12,7 +12,7 @@ interface MapViewProps {
   routes?: Route[];
 }
 
-export default function MapView({ center = [77.209, 28.6139], zoom = 15, onSafeStopClick, routes = [] }: MapViewProps) {
+export default function MapView({ center = [77.5946, 12.9716], zoom = 15, onSafeStopClick, routes = [] }: MapViewProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [mapReady, setMapReady] = useState(false);
@@ -105,30 +105,54 @@ export default function MapView({ center = [77.209, 28.6139], zoom = 15, onSafeS
     const map = mapRef.current;
     if (!map || !mapReady) return;
 
-    try {
-      routes.forEach((route) => {
-        const sourceId = `route-${route.type}`;
-        const layerId = `route-${route.type}-layer`;
-        const geojson: GeoJSON.Feature = { type: 'Feature', properties: {}, geometry: route.geometry };
+try {
+  const routeList = Array.isArray(routes) ? routes : [routes.recommended, routes.shortest].filter(Boolean);
+  console.log('Route list for map:', routeList);
+routeList.forEach((route: any, i: number) => {
+const routeType = i === 0 ? 'Recommended' : 'Shortest';
+    const sourceId = `route-${routeType}`;
+    const layerId = `route-${routeType}-layer`;
 
-        const existingSource = map.getSource(sourceId) as maplibregl.GeoJSONSource | undefined;
-        if (existingSource) {
-          existingSource.setData(geojson);
-        } else {
-          map.addSource(sourceId, { type: 'geojson', data: geojson });
-          map.addLayer({
-            id: layerId,
-            type: 'line',
-            source: sourceId,
-            paint: route.type === 'recommended'
-              ? { 'line-color': '#F3EFE9', 'line-width': 5 }
-              : { 'line-color': '#E11D2E', 'line-width': 3, 'line-dasharray': [2, 2] },
-          });
-        }
+    const geojson: GeoJSON.Feature = {
+      type: 'Feature',
+      properties: {},
+      geometry: route.geometry || (route.features?.[0]?.geometry),
+    };
+
+    const existingSource = map.getSource(sourceId) as maplibregl.GeoJSONSource | undefined;
+    if (existingSource) {
+      existingSource.setData(geojson);
+    } else {
+      map.addSource(sourceId, { type: 'geojson', data: geojson });
+      map.addLayer({
+        id: layerId,
+        type: 'line',
+        source: sourceId,
+        paint:
+          routeType.toLowerCase() === 'recommended'
+            ? { 'line-color': '#FFFF00', 'line-width': 20,  'line-opacity': 1 }
+            : { 'line-color': '#E11D2E', 'line-width': 8, 'line-dasharray': [2, 2] },
       });
-    } catch (err) {
-      console.warn('Route layer update skipped:', err);
+map.moveLayer(layerId);
     }
+  });
+  // Auto-zoom to the route
+  const allCoords = routeList.flatMap((r: any) => r.features?.[0]?.geometry?.coordinates || []);
+  if (allCoords.length > 0) {
+    const bounds = allCoords.reduce(
+      (b: maplibregl.LngLatBounds, c: [number, number]) => b.extend(c),
+      new maplibregl.LngLatBounds(allCoords[0], allCoords[0])
+    );
+    map.fitBounds(bounds, { padding: 50, maxZoom: 16 });
+  }
+  // Make sure the recommended route is drawn on top
+  if (routeList.some((r: any) => (r.properties?.name || '').toLowerCase() === 'recommended')) {
+    map.moveLayer('route-Recommended-layer');
+  }
+} catch (error) {
+  console.error('Route layer update failed:', error);
+}
+
 
     return () => {
       const m = mapRef.current;
