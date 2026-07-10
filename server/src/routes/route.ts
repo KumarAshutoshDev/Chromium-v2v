@@ -1,9 +1,9 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
+import { findRoute } from "../services/pathfinding";
 
 const router = Router();
 
-// TODO: Replace with real A* engine (Task 47)
-router.post("/", (req, res) => {
+router.post("/", (req: Request, res: Response) => {
   const { origin, destination } = req.body;
 
   if (!origin || !destination) {
@@ -11,52 +11,32 @@ router.post("/", (req, res) => {
     return;
   }
 
-  const recommended = {
+  const recommended = findRoute(origin.lat, origin.lng, destination.lat, destination.lng, true);
+  const shortest = findRoute(origin.lat, origin.lng, destination.lat, destination.lng, false);
+
+  const toGeoJSON = (route: any) => ({
     type: "FeatureCollection",
     features: [
       {
         type: "Feature",
         geometry: {
           type: "LineString",
-          coordinates: [
-            [77.5946, 12.9716],
-            [77.5950, 12.9720],
-            [77.5954, 12.9724],
-          ],
+          coordinates: route.path.map((n: any) => [n.lng, n.lat]),
         },
         properties: {
-          name: "Recommended",
-          walkTime: "8 min",
-          hazardCount: 1,
-          safeStopWaypoints: ["stop-1"],
+          walkTime: Math.round(route.totalDistance / 80) + " min", // 80 m/min walking
+          hazardCount: route.totalHazard,
+          distance: route.totalDistance + " m",
+          safeStopWaypoints: route.path.filter((n: any) => n.name).map((n: any) => n.name),
         },
       },
     ],
-  };
+  });
 
-  const shortest = {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        geometry: {
-          type: "LineString",
-          coordinates: [
-            [77.5946, 12.9716],
-            [77.5954, 12.9724],
-          ],
-        },
-        properties: {
-          name: "Shortest",
-          walkTime: "5 min",
-          hazardCount: 2,
-          hazardSegments: ["seg-2"],
-        },
-      },
-    ],
-  };
-
-  res.json({ recommended, shortest });
+  res.json({
+    recommended: recommended ? toGeoJSON(recommended) : null,
+    shortest: shortest ? toGeoJSON(shortest) : null,
+  });
 });
 
 export default router;
