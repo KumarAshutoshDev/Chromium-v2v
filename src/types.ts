@@ -1,4 +1,5 @@
 // src/types.ts
+import type { LineString } from 'geojson';
 export interface SafeStop {
   id: string;
   name: string;
@@ -9,22 +10,27 @@ export interface SafeStop {
 
 export interface Segment {
   id: string;
-  geometry: GeoJSON.LineString;
+  geometry: LineString;
   aggregatedSeverity: number;
 }
 
 export interface Route {
   type: 'recommended' | 'shortest';
-  geometry: GeoJSON.LineString;
+  geometry: LineString;
   estimatedMinutes: number;
   hazardCount: number;
 }
 
 export interface PanicResult {
+  safeStopId: string;
   name: string;
-  walkTime: number;
-  stop: SafeStop;
-  route: GeoJSON.LineString;
-  summary: string; // e.g. "Café Amara — 3 min, lit main road, 5 confirmations."
-  estimatedMinutes: number;
+  category: string;
+  location: { lat: number; lng: number };
+  trustScore: number;
+  oneLiner: string;
+  route: { type: string; coordinates: number[][] };
+  walkTime: string;
+  distance?: string;
+  hazardCount?: number;
+  lighting?: string;
 }

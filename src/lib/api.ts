@@ -1,5 +1,5 @@
 // src/lib/api.ts
-import type { SafeStop, Segment, Route, PanicResult } from '../types';
+import type { SafeStop, Segment,  PanicResult } from '../types';
 import { mockSafeStops, mockSegments, mockRoutes, mockPanicResults } from './mockData';
 import { auth } from './firebase';
 

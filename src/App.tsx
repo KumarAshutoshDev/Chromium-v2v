@@ -11,7 +11,7 @@ import DestinationInput from './components/DestinationInput';
 import RouteComparisonPanel from './components/RouteComparisonPanel';
 import { initAnonymousAuth } from './lib/firebase';
 import { fetchRoute, confirmReport } from './lib/api';
-import type { SafeStop, Route, PanicResult } from './types';
+import type { SafeStop, PanicResult } from './types';
 import type { ConditionTag } from './components/ReportForm';
 import NominationForm from './components/NominationForm';
 import LiveShareToggle from './components/LiveShareToggle';
@@ -21,7 +21,7 @@ function App() {
   const [uid, setUid] = useState<string | null>(null);
   const [selectedStop, setSelectedStop] = useState<SafeStop | null>(null);
   const [showReportForm, setShowReportForm] = useState(false);
-  const [routes, setRoutes] = useState<Route[]>([]);
+  const [routes, setRoutes] = useState<any>(null);
   const [showPanic, setShowPanic] = useState(false);
   const [panicRoute, setPanicRoute] = useState<PanicResult | null>(null);
   const [showNominationForm, setShowNominationForm] = useState(false);
@@ -53,9 +53,9 @@ console.log("Panic select result:", result);
   };
 
   // Render the panic-selected route as a single "recommended-style" route on the map
-  const panicRouteAsRoute: Route[] = panicRoute
-    ? [{ type: 'recommended', geometry: panicRoute.route, estimatedMinutes: panicRoute.estimatedMinutes, hazardCount: 0 }]
-    : [];
+const panicRouteAsRoute: any[] = panicRoute
+  ? [{ type: 'recommended', geometry: panicRoute.route }]
+  : [];
 
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>

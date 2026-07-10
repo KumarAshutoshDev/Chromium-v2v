@@ -2,14 +2,15 @@
 import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import { fetchSafeStops, fetchSegments } from '../lib/api';
-import type { SafeStop, Segment, Route } from '../types';
+import type { SafeStop, Segment } from '../types';
 import './MapView.css';
+import type { Feature, FeatureCollection } from 'geojson';
 
 interface MapViewProps {
   center?: [number, number];
   zoom?: number;
   onSafeStopClick?: (stop: SafeStop) => void;
-  routes?: Route[];
+  routes?: any;
 }
 
 export default function MapView({ center = [77.5946, 12.9716], zoom = 15, onSafeStopClick, routes = [] }: MapViewProps) {
@@ -70,7 +71,7 @@ export default function MapView({ center = [77.5946, 12.9716], zoom = 15, onSafe
     const map = mapRef.current;
     if (!map || !mapReady || segments.length === 0) return;
 
-    const geojson: GeoJSON.FeatureCollection = {
+    const geojson: FeatureCollection = {
       type: 'FeatureCollection',
       features: segments.map((seg) => ({
         type: 'Feature',
@@ -116,7 +117,7 @@ const routeType = i === 0 ? 'Recommended' : 'Shortest';
     const sourceId = `route-${routeType}`;
     const layerId = `route-${routeType}-layer`;
 
-    const geojson: GeoJSON.Feature = {
+    const geojson: Feature = {
       type: 'Feature',
       properties: {},
       geometry: route.geometry || (route.features?.[0]?.geometry),
