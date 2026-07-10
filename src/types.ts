@@ -21,6 +21,8 @@ export interface Route {
 }
 
 export interface PanicResult {
+  name: string;
+  walkTime: number;
   stop: SafeStop;
   route: GeoJSON.LineString;
   summary: string; // e.g. "Café Amara — 3 min, lit main road, 5 confirmations."
