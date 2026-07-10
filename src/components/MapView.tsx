@@ -2,7 +2,8 @@
 import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import { fetchSafeStops, fetchSegments } from '../lib/api';
-import type { SafeStop, Segment, Route } from '../types';
+import type { SafeStop, Segment } from '../types';
+import type { Route } from '../types';
 import './MapView.css';
 
 interface MapViewProps {
@@ -106,7 +107,7 @@ export default function MapView({ center = [77.209, 28.6139], zoom = 15, onSafeS
     if (!map || !mapReady) return;
 
     try {
-      routes.forEach((route) => {
+      routes.forEach((route: Route) => {
         const sourceId = `route-${route.type}`;
         const layerId = `route-${route.type}-layer`;
         const geojson: GeoJSON.Feature = { type: 'Feature', properties: {}, geometry: route.geometry };
