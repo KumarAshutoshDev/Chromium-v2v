@@ -1,0 +1,16 @@
+.expired-share {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--night);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.expired-share p {
+  font-family: var(--font-body);
+  color: var(--ash);
+  font-size: var(--text-base);
+}

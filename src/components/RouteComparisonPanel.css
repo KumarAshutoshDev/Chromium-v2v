@@ -1,0 +1,58 @@
+.route-comparison-wrapper {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 420px);
+  z-index: 10;
+}
+
+.route-comparison__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.route-comparison__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--paper);
+  font-size: var(--text-sm);
+}
+
+.route-comparison__close {
+  background: none;
+  border: none;
+  color: var(--ash);
+  cursor: pointer;
+  font-size: var(--text-sm);
+}
+
+.route-comparison__row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-top: 1px solid var(--gray-2);
+}
+
+.route-comparison__row:first-of-type {
+  border-top: none;
+}
+
+.route-comparison__label {
+  font-family: var(--font-body);
+  color: var(--paper);
+  font-size: var(--text-sm);
+}
+
+.route-comparison__meta {
+  font-family: var(--font-utility);
+  color: var(--ash);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+}
+
+.route-comparison__hazard {
+  color: var(--signal-red);
+}

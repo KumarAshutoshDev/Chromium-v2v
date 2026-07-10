@@ -1,0 +1,45 @@
+.live-share {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.live-share__input {
+  background-color: var(--gray-1);
+  border: 1px solid var(--gray-2);
+  border-radius: 8px;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  padding: 10px 12px;
+}
+
+.live-share__active {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.live-share__label {
+  font-family: var(--font-utility);
+  color: var(--trust-gold);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+}
+
+.live-share__link {
+  font-family: var(--font-utility);
+  color: var(--paper);
+  font-size: var(--text-xs);
+  word-break: break-all;
+}
+
+.live-share__disable {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--ash);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,25 +1,17 @@
-.safestop-card {
-  background-color: rgba(11, 11, 14, 0.85);
+.safestop-card__confirm {
+  margin-top: 8px;
+  background: none;
   border: 1px solid var(--gray-2);
-  border-radius: 12px;
-  padding: 16px;
-}
-
-.safestop-card--confirmed {
-  border-left: 2px solid var(--trust-gold);
-}
-
-.safestop-card__title {
-  font-family: var(--font-body);
-  font-weight: 600; /* Inter Semibold */
+  border-radius: 999px;
   color: var(--paper);
-  font-size: var(--text-base);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  padding: 6px 12px;
+  cursor: pointer;
 }
 
-.safestop-card__meta {
-  font-family: var(--font-utility);
-  color: var(--ash);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-mono);
-  margin-top: 4px;
+.safestop-card__confirm:disabled {
+  color: var(--trust-gold);
+  border-color: var(--trust-gold);
+  cursor: default;
 }
