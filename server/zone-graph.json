@@ -1,0 +1,17 @@
+{
+  "nodes": {
+    "A": { "lat": 12.9716, "lng": 77.5946, "name": "Café Amara" },
+    "B": { "lat": 12.9720, "lng": 77.5950, "name": "24/7 Pharmacy" },
+    "C": { "lat": 12.9724, "lng": 77.5954 },
+    "stop1": { "lat": 12.9716, "lng": 77.5946, "name": "Café Amara" },
+    "stop2": { "lat": 12.9720, "lng": 77.5950, "name": "24/7 Pharmacy" },
+    "stop3": { "lat": 12.9730, "lng": 77.5955, "name": "Transit Stop — MG Road" }
+  },
+  "edges": [
+    { "from": "A", "to": "B", "distance": 60, "hazardScore": 2, "segmentId": "BbRwatjOt72SC4xjrRBu" },
+    { "from": "B", "to": "C", "distance": 60, "hazardScore": 5, "segmentId": "zxwKwhCOFSYwbLjkFweI" },
+    { "from": "A", "to": "stop1", "distance": 0 },
+    { "from": "B", "to": "stop2", "distance": 0 },
+    { "from": "C", "to": "stop3", "distance": 80 }
+  ]
+}

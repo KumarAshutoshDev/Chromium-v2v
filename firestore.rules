@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: user must be authenticated
+    function isAuth() {
+      return request.auth.uid != null;
+    }
+
+    // zones: public read, no direct writes (admin only)
+    match /zones/{zoneId} {
+      allow read: if isAuth();
+      allow write: if false;
+    }
+
+    // segments: public read, no direct writes (backend aggregates)
+    match /segments/{segmentId} {
+      allow read: if isAuth();
+      allow write: if false;
+    }
+
+    // safeStops: public read, confirmations can be updated by authenticated users
+    match /safeStops/{stopId} {
+      allow read: if isAuth();
+      allow create: if isAuth();
+      allow update: if isAuth() &&
+        request.resource.data.keys().hasOnly(['confirmations']);
+    }
+
+    // reports: public read, create allowed, confirmations array can be updated
+    match /reports/{reportId} {
+      allow read: if isAuth();
+      allow create: if isAuth() && request.resource.data.uid == request.auth.uid;
+      allow update: if isAuth() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['confirmations', 'status', 'severity']);
+    }
+
+    // users: only own document
+    match /users/{userId} {
+      allow read, write: if isAuth() && request.auth.uid == userId;
+    }
+
+    // liveShares: create allowed, read only if not expired
+    match /liveShares/{shareId} {
+      allow read: if isAuth() && resource.data.expiresAt > request.time;
+      allow create: if isAuth();
+      allow delete: if false; // no direct delete
+    }
+  }
+}

@@ -1,25 +1,20 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
+import { db } from "../config/firebase";
 
 const router = Router();
 
-// TODO: Replace with real Firestore query once AI seeds data (Task 33)
-router.get("/", (_req, res) => {
-  res.json([
-    {
-      id: "stop-1",
-      name: "Café Amara",
-      category: "cafe",
-      location: { lat: 12.9716, lng: 77.5946 },
-      trustScore: 8.5,
-    },
-    {
-      id: "stop-2",
-      name: "24/7 Pharmacy",
-      category: "pharmacy",
-      location: { lat: 12.9720, lng: 77.5950 },
-      trustScore: 9.2,
-    },
-  ]);
+router.get("/", async (_req: Request, res: Response) => {
+  try {
+    const snapshot = await db.collection("safeStops").get();
+    const stops = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    res.json(stops);
+  } catch (err) {
+    console.error("Failed to fetch SafeStops:", err);
+    res.status(500).json({ error: "Failed to fetch SafeStops" });
+  }
 });
 
 export default router;

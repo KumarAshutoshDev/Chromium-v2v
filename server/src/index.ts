@@ -9,6 +9,7 @@ import routeRoutes from "./routes/route";
 import panicRoutes from "./routes/panic";
 import confirmRoutes from "./routes/confirm";
 import liveShareRoutes from "./routes/liveshare";
+import nominateRoutes from "./routes/nominate";
 
 
 dotenv.config();
@@ -48,6 +49,8 @@ app.use("/api/route", routeRoutes);
 app.use("/api/panic-reroute", panicRoutes);
 app.use("/api/reports", confirmRoutes);
 app.use("/api/live-share", liveShareRoutes);
+app.use("/api/safestops/nominate", nominateRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
