@@ -3,12 +3,21 @@
 :root {
   /* Core palette */
   --night: #0B0B0E;
-  --signal-red: #E11D2E;
-  --ember: #7A1420;
+  /* --signal-red: #E11D2E;
+  --ember: #7A1420; */
+  --signal-red: #FF3B4E;   /* was #E11D2E — more vivid */
+  --ember: #9A1B2C;
   --paper: #F3EFE9;
   --ash: #8B8983;
-  --trust-gold: #C9A24B;
+  /* --trust-gold: #C9A24B; */
+  --trust-gold: #E3B341;   /* was #C9A24B — warmer, richer */
 
+  --night-violet: #16131F;
+  --night-teal: #0B1616;
+  --glow-red: rgba(255, 59, 78, 0.45);
+  --glow-gold: rgba(227, 179, 65, 0.35);
+  --glow-paper: rgba(243, 239, 233, 0.12);
+  
   /* Structural grays — for borders/dividers ONLY, never content color */
   --gray-1: #1A1A1F;
   --gray-2: #2A2A30;
